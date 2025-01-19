@@ -2,7 +2,15 @@ package injections
 
 import "context"
 
-func (i *Injections) Inject(ctx context.Context) (map[string]string, error) {
+type ExampleParams struct {
+	Wow string
+}
 
-	return make(map[string]string), nil
+func (i *Injections) Inject(ctx context.Context, arg ExampleParams) (map[string]string, error) {
+
+	res := make(map[string]string)
+
+	res["wow"] = arg.Wow
+
+	return res, nil
 }
