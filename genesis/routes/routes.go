@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"solar-system/genesis/handler"
+	"bliss-server/genesis/handler"
 
 	"github.com/go-chi/chi/v5"
 )

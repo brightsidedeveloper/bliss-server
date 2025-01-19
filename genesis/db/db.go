@@ -1,21 +1,23 @@
 package db
 
 import (
+	"bliss-server/genesis/queries"
 	"context"
-	"database/sql"
 	"log"
 
-	_ "github.com/jackc/pgx/v5/stdlib"
+	"github.com/jackc/pgx/v5"
 )
 
-func CreateDB(dsn string) (*sql.DB, error) {
-	db, err := sql.Open("pgx", dsn)
+func CreateDB(dsn string) (*queries.Queries, error) {
+	ctx := context.Background()
+
+	conn, err := pgx.Connect(ctx, dsn)
 	if err != nil {
 		return nil, err
 	}
-	if err := db.PingContext(context.Background()); err != nil {
-		return nil, err
-	}
+
+	queries := queries.New(conn)
+
 	log.Println("Database connected successfully!")
-	return db, nil
+	return queries, nil
 }

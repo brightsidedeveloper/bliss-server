@@ -1,16 +1,16 @@
 package main
 
 import (
+	"bliss-server/genesis/db"
+	"bliss-server/genesis/handler"
+	"bliss-server/genesis/queries"
+	"bliss-server/genesis/routes"
+	"bliss-server/genesis/util"
 	"context"
-	"database/sql"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
-	"solar-system/genesis/db"
-	"solar-system/genesis/handler"
-	"solar-system/genesis/routes"
-	"solar-system/genesis/util"
 	"syscall"
 	"time"
 
@@ -24,12 +24,11 @@ func main() {
 
 	loadEnv()
 
-	db := connectDB()
-	defer db.Close()
+	queries := connectDB()
 
 	j := &util.JSON{}
 
-	h := &handler.Handler{DB: db, JSON: j}
+	h := &handler.Handler{Queries: queries, JSON: j}
 
 	r := chi.NewRouter()
 
@@ -57,7 +56,7 @@ func loadEnv() {
 	}
 }
 
-func connectDB() *sql.DB {
+func connectDB() *queries.Queries {
 	dsn := os.Getenv("DSN")
 	if dsn == "" {
 		log.Fatal("$DSN must be set")

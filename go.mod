@@ -1,4 +1,4 @@
-module solar-system
+module bliss-server
 
 go 1.23.3
 

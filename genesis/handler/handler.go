@@ -1,11 +1,11 @@
 package handler
 
 import (
-	"database/sql"
-	"solar-system/genesis/util"
+	"bliss-server/genesis/queries"
+	"bliss-server/genesis/util"
 )
 
 type Handler struct {
-	DB   *sql.DB
-	JSON *util.JSON
+	Queries *queries.Queries
+	JSON    *util.JSON
 }
