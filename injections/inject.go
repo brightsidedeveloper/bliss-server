@@ -2,11 +2,11 @@ package injections
 
 import "context"
 
-type ExampleParams struct {
+type InjectParams struct {
 	Wow string
 }
 
-func (i *Injections) Inject(ctx context.Context, arg ExampleParams) (map[string]string, error) {
+func (i *Injections) Inject(ctx context.Context, arg InjectParams) (map[string]string, error) {
 
 	res := make(map[string]string)
 
