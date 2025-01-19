@@ -6,6 +6,7 @@ import (
 	"bliss-server/genesis/queries"
 	"bliss-server/genesis/routes"
 	"bliss-server/genesis/util"
+	"bliss-server/injections"
 	"context"
 	"log"
 	"net/http"
@@ -25,10 +26,11 @@ func main() {
 	loadEnv()
 
 	queries := connectDB()
+	i := injections.NewInjections()
 
-	j := &util.JSON{}
+	j := util.NewJSON()
 
-	h := &handler.Handler{Queries: queries, JSON: j}
+	h := handler.NewHandler(queries, i, j)
 
 	r := chi.NewRouter()
 
