@@ -26,6 +26,7 @@ func main() {
 	loadEnv()
 
 	queries := connectDB()
+
 	i := injections.NewInjections()
 
 	j := util.NewJSON()
